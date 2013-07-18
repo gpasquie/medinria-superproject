@@ -65,7 +65,8 @@ if (NOT DEFINED ${ep}_SOURCE_DIR)
   set(location GIT_REPOSITORY "${GITHUB_PREFIX}medInria/medInria-public.git")
 endif()
 
-set(custom_update_cmd git pull --ff-only ALWAYS 1)
+#set(custom_update_cmd git pull --ff-only ALWAYS 1)
+set(custom_update_cmd )
 
 
 ## #############################################################################
@@ -97,8 +98,12 @@ set(cmake_args
   -DmedInria_VERSION_MINOR:STRING=${${PROJECT_NAME}_VERSION_MINOR}
   -DmedInria_VERSION_PATCH:STRING=${${PROJECT_NAME}_VERSION_PATCH}
   -DmedInria_VERSION_TWEAK:STRING=${${PROJECT_NAME}_VERSION_TWEAK}
+  -Ddtk_SHA1:STRING="${dtk_SHA1}"
+  -DDCMTK_SHA1:STRING="${DCMTK_SHA1}"
+  -DQtDCM_SHA1:STRING="${QtDCM_SHA1}"
+  -DRPI_SHA1:STRING="${RPI_SHA1}"
+  -DTTK_SHA1:STRING="${TTK_SHA1}"
   )
-  
   
 ## #############################################################################
 ## Add external-project

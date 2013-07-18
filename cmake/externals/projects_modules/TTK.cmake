@@ -51,10 +51,19 @@ EP_SetDirectories(${ep}
 ## Define repository where get the sources
 ## #############################################################################
 
+set (url "svn://scm.gforge.inria.fr/svnroot/ttk/trunk")
+
 if (NOT DEFINED ${ep}_SOURCE_DIR)
-  set(location SVN_REPOSITORY "svn://scm.gforge.inria.fr/svnroot/ttk/trunk")
+  set(location SVN_REPOSITORY ${url})
 endif()
 
+execute_process(COMMAND svn info ${url}
+  COMMAND grep "^Revision" 
+  OUTPUT_VARIABLE SHA1
+  OUTPUT_STRIP_TRAILING_WHITESPACE
+  )
+
+set(${ep}_SHA1 ${SHA1} PARENT_SCOPE)
 
 ## #############################################################################
 ## Add specific cmake arguments for configuration step of the project

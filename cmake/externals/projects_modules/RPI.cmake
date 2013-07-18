@@ -49,10 +49,18 @@ EP_SetDirectories(${ep}
 ## Define repository where get the sources
 ## #############################################################################
 
+set (url "${GITHUB_PREFIX}Inria-Asclepios/RPI.git")
+
 if (NOT DEFINED ${ep}_SOURCE_DIR)
-  set(location GIT_REPOSITORY "${GITHUB_PREFIX}Inria-Asclepios/RPI.git")
+  set(location GIT_REPOSITORY ${url})
 endif()
 
+execute_process(COMMAND git ls-remote ${url} HEAD
+  OUTPUT_VARIABLE SHA1
+  OUTPUT_STRIP_TRAILING_WHITESPACE
+  )
+
+set(${ep}_SHA1 ${SHA1} PARENT_SCOPE)
 
 ## #############################################################################
 ## Add specific cmake arguments for configuration step of the project
